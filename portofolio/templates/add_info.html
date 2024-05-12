@@ -1,0 +1,67 @@
+{% block content %}
+{% load static %}
+
+{% include 'headerporto.html' with site_id=site_id %}
+
+
+
+<div class="container">
+    <h2>Ajouter des informations</h2>
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="nom">Nom:</label>
+        <input type="text" id="nom" name="nom" required><br><br>
+        
+        <label for="prenom">Prénom:</label>
+        <input type="text" id="prenom" name="prenom" required><br><br>
+        
+        <label for="phone">Téléphone:</label>
+        <input type="text" id="phone" name="phone" required><br><br>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+        
+        <label for="adresse">Adresse:</label>
+        <input type="text" id="adresse" name="adresse" required><br><br>
+        
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" required><br><br>
+        
+        <button type="submit">Ajouter Infos</button>
+    </form>
+</div>
+
+
+<div class="card-group">
+    {% for info in infos %}
+    <div class="card">
+        <img class="card-img-top" src="{{ about.image.url }}" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">{{ info.nom }}</h5>
+            <h5 class="card-title">{{ info.prenom }}</h5>
+            <h5 class="card-title">{{ info.phone }}</h5>
+            <h5 class="card-title">{{ info.email }}</h5>
+            <h5 class="card-title">{{ info.adresse }}</h5>
+            
+            <p class="card-text">{{ info.location }}</p>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">Last updated 3 mins ago</small>
+        </div>
+        <!-- Bouton pour la modification du service -->
+        {% comment %} <form method="GET" action="{% url 'modif_pro' pro.id %}">
+            <button type="submit" class="btn btn-primary">Modifier</button>
+        </form> {% endcomment %}
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

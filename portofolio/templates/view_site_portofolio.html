@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <title>{{ title }}</title>
+    <style>
+       
+
+        body {
+            margin: 0;
+            padding: 0;
+            /* background-color: {{ couleur }}; */
+        }
+
+        .bg-header{
+            background-color: cornflowerblue;
+        }
+
+        .bg-texte1{
+            color: white;
+        }
+
+        .bg-texte2{
+            color: cornflowerblue;
+        }
+
+        .header-content {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container-fluid">
+        <!-- Header -->
+        <!-- mt pou margin anle-->
+        <!-- round pou border radius -->
+        <header class="d-flex flex-wrap align-items-center justify-content-between py-2 mb-4 mt-3 border-bottom bg-header rounded-5 ">
+            <div class="col-md-3 mb-2 mb-md-0 header-content">
+                <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+                    <h1 class="bg-texte1"> <img src="{{ logo }}" alt="{{ title }}"></h1>
+               
+                </a>
+            </div>
+
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 header-content">
+                <li><a href="#" class="nav-link px-2 bg-texte1">Home</a></li>
+                <li><a href="#" class="nav-link px-2 bg-texte1">Features</a></li>
+                <li><a href="#" class="nav-link px-2 bg-texte1">Pricing</a></li>
+                <li><a href="#" class="nav-link px-2 bg-texte1">FAQs</a></li>
+                <li><a href="#" class="nav-link px-2 bg-texte1">About</a></li>
+            </ul>
+
+            <div class="col-md-3 text-end header-content">
+                <button type="button" class="btn btn-outline-primary me-2 bg-texte1 ">Login</button>
+               
+            </div>
+        </header>
+
+        <!-- Heroes -->
+        <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-5 border ">
+            <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+                {% for heroe in heroes %}
+                <h3 class="display-4  lh-1 bg-texte2"> {{ heroe.titre1 }}  </h3>
+
+                <h1 class="display-4 fw-bold lh-1 bg-texte2">  {{ heroe.titre2 }} </h1>
+                
+                <p class="lead">{{ heroe.paragraphe }}</p>
+                
+                {% endfor %}
+                
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
+                    <button type="button" class="btn btn-primary bg-header btn-lg px-4 me-md-2 fw-bold">Contactez</button>
+                </div>
+            </div>
+            <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
+                <img class="rounded-lg-3" src="Image/person1.png" alt="" width="300" height="300">
+            </div>
+        </div>
+    </div>
+
+
+ <!-- About -->
+
+ <!-- About 1 - Bootstrap Brain Component -->
+<section class="py-3 py-md-5 py-xl-8">
+    <div class="container">
+      <div class="row gy-3 gy-md-4 gy-lg-0 align-items-lg-center">
+        <div class="col-12 col-lg-6 col-xl-5">
+          <img class="img-fluid rounded" loading="lazy" src="./assets/img/about-img-1.jpg" alt="">
+        </div>
+        <div class="col-12 col-lg-6 col-xl-7">
+          <div class="row justify-content-xl-center">
+            <div class="col-12 col-xl-11">
+              
+              <h2 class="pb-2 border-bottom bg-texte2 text-center display-5 fw-bold"> Who Am I?</h2>
+              {% if about %}
+
+          
+              <p class="lead fs-4 text-secondary mb-3">{{ about.texte }}</p>
+
+                {% if about.autre %}
+                 
+                <p class="mb-5">{{ about.autre }}</p>
+
+                {% endif %}
+             {% endif %}
+              <div class="row gy-4 gy-md-0 gx-xxl-5X">
+                <div class="col-12 col-md-6">
+                  <div class="d-flex">
+                    <div class="me-4 text-primary">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                        <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 class="mb-3">Versatile Brand</h4>
+                      <p class="text-secondary mb-0">We are crafting a digital method that subsists life across all mediums.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <div class="d-flex">
+                    <div class="me-4 text-primary">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-fire" viewBox="0 0 16 16">
+                        <path d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16Zm0-1c-1.657 0-3-1-3-2.75 0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5-.179 1-.25 2 1 3 .625.5 1 1.364 1 2.25C11 14 9.657 15 8 15Z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 class="mb-3">Digital Agency</h4>
+                      <p class="text-secondary mb-0">We believe in innovation by merging primary with elaborate ideas.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    
+
+
+
+    <!-- Services -->
+<div class="container px-4 py-5" id="featured-3">
+    <h2 class="pb-2 border-bottom bg-texte2 text-center display-5 fw-bold">Services</h2>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+      {% for service in services %}
+      <div class="feature col">
+        <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+            
+            <img src="{{ service.image.url }}" alt="{{ service.titre }}" width="100" height="100">
+
+        </div>
+        <h3 class="fs-2 text-body-emphasis">{{ service.titre }}</h3>
+        <p>{{ service.descriptions }}</p>
+        <p>{{ service.autres }}</p>
+        <!-- Ajoutez ici tout autre détail sur le service si nécessaire -->
+        <a href="#" class="icon-link">
+          Call to action
+          <svg class="bi"><use xlink:href="#chevron-right"/></svg>
+        </a>
+      </div>
+      {% endfor %}
+
+
+    </div>
+  </div>
+
+
+
+  <!-- Projets -->
+
+<div class="container px-4 py-5" id="custom-cards">
+    <h2 class="pb-2 border-bottom bg-texte2 text-center display-5 fw-bold"> Projets</h2>
+    <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+        {% for pro in pros %}
+        <div class="col">
+            <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('{{ pro.image.url }}');">
+                <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                    <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">{{ pro.titre }}</h3>
+                    <p>{{ pro.description }}</p>
+                    <ul class="d-flex list-unstyled mt-auto">
+                        <li class="me-auto">
+                            <img src="{{ pro.site.logo }}" alt="{{ pro.site.title }}" width="32" height="32" class="rounded-circle border border-white">
+                        </li>
+                        <li class="d-flex align-items-center me-3">
+                            <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"/></svg>
+                            <small>{{ pro.site.title }}</small>
+                        </li>
+                        <li class="d-flex align-items-center">
+                            <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"/></svg>
+                            <small>{{ pro.created_at|date }}</small>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+  
+
+
+    <!-- Afficher le logo du site -->
+    <img src="{{ logo }}" alt="Logo">
+
+    <!-- Afficher d'autres informations du site -->
+    <h1>{{ title }}</h1>
+    <p>Domaine: {{ sitewebpam.domaine }}</p>
+    <!-- Afficher les informations supplémentaires -->
+    <h2>Informations:</h2>
+    {% for info in infos %}
+        <p>{{ info.nom }} {{ info.prenom }} {{ info.phone }} {{ info.email }} {{ info.adresse }} {{ info.location }}</p>
+    {% endfor %}
+
+    {% comment %} <h2>A propos:</h2>
+    {% if about %}
+        <p>{{ about.texte }}</p>
+        {% if about.autre %}
+            <p>{{ about.autre }}</p>
+        {% endif %}
+    {% endif %} {% endcomment %}
+
+    {% comment %} <h2>Services:</h2>
+    {% for service in services %}
+        <p>{{ service.titre }} {{ service.image }} {{ service.descriptions }} {{ service.autres }}</p>
+    {% endfor %}
+
+    <h2>Projets:</h2>
+    <ul>
+        {% for project in projects %}
+            <li>{{ project.title }}</li>
+        {% endfor %}
+    </ul> {% endcomment %}
+
+    <!-- Lien pour retourner au tableau de bord -->
+    <a href="{% url 'dashboardportofolio' domaine=sitewebpam.domaine %}">Retour au tableau de bord</a>
+</body>
+</html>

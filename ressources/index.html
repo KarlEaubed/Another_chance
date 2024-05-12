@@ -1,0 +1,145 @@
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blog - WebPam</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"/>
+  <style>
+    * {
+        box-sizing: border-box
+    }
+
+    :root {
+        --site-color: {{ site_color }};
+    }
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@600&display=swap');
+    body{
+        /* margin: 10px 80px; */
+        font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    nav {
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:space-between;
+    }
+    nav h1{
+        font-family: 'Crimson Text', serif;
+        font-size: 30px;
+    }
+    nav .onglets{
+        margin-top: 35px;
+    }
+    nav .onglets a{
+        text-decoration: none;
+        color:#7f7e7e;
+        margin-right: 10px;
+    }
+
+    .articles{
+        margin-top: 30px;
+    }
+    .articles .article{
+        display: flex;
+        flex-wrap:wrap;
+        margin-bottom: 30px;
+    }
+    .articles .article .left img{
+        height: 300px;
+        width: 500px;
+    }
+    .articles .article .right {
+        margin-left: 40px;
+        max-width: 50%;
+    }
+    .articles .article .right p.date{
+        color: #7f7e7e;
+    }
+    .articles .article .right p.description{
+        color: #2d2d2d;
+    }
+
+    footer {
+        margin-top: 30px;
+        display: flex;
+        flex-wrap:wrap;
+        justify-content: space-between;
+        color: #494949;
+    }
+    footer h2{
+        font-size: 20px;
+        font-family: 'Crimson Text', serif;
+        margin-top: 20px;
+    }
+    footer .social-media{
+        display:flex;
+    }
+    footer .social-media p{
+        font-size: 18px;
+        margin-right: 20px;
+    }
+
+    @media screen and (max-width: 640px){
+        body{
+            margin: 10px 20px;
+        }
+        nav .onglets{
+            margin-top: -10px;
+        }
+        .articles .article .left img{
+            height: 100%;
+            width:100%;
+        }
+        .articles .article .right{
+            margin: 0px;
+            max-width: 100%;
+        }
+        footer .social-media{
+            margin-top: -20px;
+        }
+    }
+  </style>
+</head>
+<body>
+  <nav style="background-color: var(--site-color);">
+    <h1 style="color: white;">{{ site_blog.title }}</h1>
+    <div class="onglets">
+      <a href="#">Home</a>
+      <a href="#">Formations</a>
+      <a href="#">Articles</a>
+    </div>
+  </nav>
+  
+  <section class="articles">
+    
+    {% for post in posts %}
+        <div class="article">
+            <div class="left">
+                <img src="{{ post.image.url }}" alt="{{ post.title }}">
+            </div>
+            <div class="right">
+                <p class="date">{{ post.created_at }}</p>
+                <h1>{{ post.title }}</h1>
+                <p class="description">{{ post.content|truncatechars:100 }}</p>
+                <p class="auteur">Julie Lablonde</p>
+            </div>
+        </div>
+    { endfor } 
+    
+  </section>
+  
+  <footer style="background-color: black;">
+    <h2>&copy; 2024, by .WebPam</h2>
+    <div class="social-media">
+      <p><i class="fab fa-facebook"></i></p>
+      <p><i class="fab fa-twitter"></i></p>
+      <p><i class="fab fa-instagram"></i></p>
+    </div>
+  </footer>
+</body>
+</html>
+{% endblock %}

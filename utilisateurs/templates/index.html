@@ -53,25 +53,12 @@
             </ul>
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
               {% if not user.is_authenticated %}
-                  <li class="nav-but">
-                      <a class="btn btn-outline-dark" href="/signin" style="font-weight: 700;">Sign In</a>
-                  </li>
-                  <li class="nav-but">
-                      <a class="btn btn-outline-dark" href="/signup" style="font-weight: 700;">Sign Up</a>
-                  </li>
-              {% else %}
-                {% if initials %}
-                  <div class="circle-button user-initials-button" style="background-color: blue; color: white; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; margin-left: 10px;">
-                      <span style="font-size: 18px;">{{ initials }}</span>
-                  </div>
-                  <!-- <div class="menu_context">
-                    <ul>
-                      <li><a href="/logout" style="text-decoration: none; color: #000;"><i class="uil uil-signout"></i>Logout</a></li>
-                    </ul>
-                  </div> -->
-                {% else %}
-                    <!-- Gérer le cas où le prénom de l'utilisateur n'est pas défini -->
-                {% endif %}
+                <li class="nav-but">
+                    <a class="btn btn-outline-dark" href="/signin" style="font-weight: 700;">Sign In</a>
+                </li>
+                <li class="nav-but">
+                    <a class="btn btn-outline-dark" href="/signup" style="font-weight: 700;">Sign Up</a>
+                </li>
               {% endif %}
           </ul>        
           </div>
@@ -161,18 +148,18 @@
   
     <!------------------------------- DEBUT PRICING SECTION -------------------------------------------->
     <section class="pricing-table">
-        <div class="details">
-          <h2>Package to suit your plan</h2>
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro, architecto, deserunt vero doloribus
-            inventore, culpa placeat excepturi voluptate nemo cupiditate laboriosam aliquam adipisci nulla
-            voluptatem facilis dolor aperiam sed minima.
-          </p>
-        </div>
-        <div class="grid">
-          <div class="box free">
-            <div class="title" style="font-weight: 900;">FREE</div>
+      <div class="details">
+        <h2>Choisissez le forfait qui vous convient</h2>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro, architecto, deserunt vero doloribus inventore, culpa placeat excepturi voluptate nemo cupiditate laboriosam aliquam adipisci nulla voluptatem facilis dolor aperiam sed minima.
+        </p>
+      </div>
+    
+      <div class="grid">
+        {% for plan in plans %}
+          <div class="box {{ plan.name }}">
+            <div class="title" style="font-weight: 900;">{{ plan.name }}</div>
             <div class="price">
-              <b>$0</b>
+              <b>${{ plan.price }}</b>
               <span>per month</span>
             </div>
             <div class="features">
@@ -182,59 +169,14 @@
               <div>Send up to 2 GB</div>
             </div>
             <div class="button">
-              <button>Learn More</button>
+              <button><a href="{% url 'checkout' plan.id %}">Buy Now</a></button>
             </div>
           </div>
-          <div class="box basic">
-            <div class="title" style="font-weight: 900;">BASIC</div>
-            <div class="price">
-              <b>$4.99</b>
-              <span>per month</span>
-            </div>
-            <div class="features">
-              <div>1 CPU</div>
-              <div>500 GB Storage</div>
-              <div>2 Users Allowed</div>
-              <div>Send up to 2 GB</div>
-            </div>
-            <div class="button">
-              <button>Learn More</button>
-            </div>
-          </div>
-          <div class="box standard">
-            <div class="title" style="font-weight: 900;">STANDARD</div>
-            <div class="price">
-              <b>$24.99</b>
-              <span>per month</span>
-            </div>
-            <div class="features">
-              <div>1 CPU</div>
-              <div>500 GB Storage</div>
-              <div>2 Users Allowed</div>
-              <div>Send up to 2 GB</div>
-            </div>
-            <div class="button">
-              <button>Learn More</button>
-            </div>
-          </div>
-          <div class="box ultimate">
-            <div class="title" style="font-weight: 900;">ULTIMATE</div>
-            <div class="price">
-              <b>$49.99</b>
-              <span>per month</span>
-            </div>
-            <div class="features">
-              <div>1 CPU</div>
-              <div>500 GB Storage</div>
-              <div>2 Users Allowed</div>
-              <div>Send up to 2 GB</div>
-            </div>
-            <div class="button">
-              <button>Learn More</button>
-            </div>
-          </div>
-        </div>
-      </section>
+        {% endfor %}
+      </div>
+    </section>
+    
+    
     <!------------------------------- FIN PRICING SECTION -------------------------------------------->
     <section class="Contact">
         <div class="content">

@@ -51,9 +51,9 @@
             <div class="input-box">
               <span class="details">Date of Birth</span>
               <div class="grouping">
-                  <input type="text" patter="[0-9]" name="day" value="" min="0" max="31" placeholder="DD" required>
-                  <input type="text" patter="[0-9]" name="month" value="" min="0" max="12" placeholder="MM" required>
-                  <input type="text" patter="[0-9]" name="year" value="" min="0" max="2050" placeholder="YYYY" required>
+                  <input type="text" pattern="[0-9]{1,2}" name="day" value="" min="0" max="31" placeholder="DD" required>
+                  <input type="text" pattern="[0-9]{1,2}" name="month" value="" min="0" max="12" placeholder="MM" required>
+                  <input type="text" pattern="[0-9]{4}" name="year" value="" min="0" max="2050" placeholder="YYYY" required>
               </div>
             </div>
           </div>

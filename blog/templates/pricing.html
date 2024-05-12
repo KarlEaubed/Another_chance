@@ -1,0 +1,50 @@
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- ICONSCOUT CDN -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Pricing</title>
+</head>
+<body>
+    <!------------------------------- DEBUT PRICING SECTION -------------------------------------------->
+    <section class="pricing-table">
+        <div class="details">
+          <h2>Choisissez le forfait qui vous convient</h2>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro, architecto, deserunt vero doloribus inventore, culpa placeat excepturi voluptate nemo cupiditate laboriosam aliquam adipisci nulla voluptatem facilis dolor aperiam sed minima.
+          </p>
+        </div>
+      
+        <div class="grid">
+          {% for plan in plans %}
+            <div class="box {{ plan.name }}">
+              <div class="title" style="font-weight: 900;">{{ plan.name }}</div>
+              <div class="price">
+                <b>${{ plan.price }}</b>
+                <span>per month</span>
+              </div>
+              <div class="features">
+                <div>1 CPU</div>
+                <div>500 GB Storage</div>
+                <div>2 Users Allowed</div>
+                <div>Send up to 2 GB</div>
+              </div>
+              <div class="button">
+                <button><a href="{% url 'checkout' plan.id %}">Buy Now</a></button>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </section>
+</body>
+</html>
+{% endblock %}

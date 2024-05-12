@@ -1,0 +1,243 @@
+<!-- Site Blog par défaut -->
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Home | {{ domaine }}</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link rel="stylesheet" href="{% static 'css/view_site.css' %}">
+        <style>
+            :root {
+                --site-color: {{ site_color }};
+                /* Ajoutez d'autres variables CSS nécessaires ici */
+            }
+            .context-menu {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 150px; /* Augmenter la largeur du menu contextuel selon vos besoins */
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+                z-index: 1;
+                margin-left: 100px; /* Ajouter une marge à gauche */
+                margin-top: 50px;
+            }
+        
+            .context-menu ul {
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+            }
+        
+            .context-menu ul li {
+                padding: 8px 12px;
+                cursor: pointer;
+            }
+
+            .context-menu ul li a {
+                text-decoration: none;
+                color: #000;
+                font-size: 15px;
+            }
+        
+            .context-menu ul li:hover {
+                background-color: #ddd;
+            }
+        
+            .show {
+                display: block;
+            }
+        </style>
+    </head>
+<body>
+    <!-- Responsive navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: var(--site-color);">
+        <div class="container">
+            <a class="navbar-brand" href="#!">{{ site_blog.title }}</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
+                    {% if user_authenticated %}
+                        <div class="circle-button" style="position: relative; background-color: black; color: white; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; margin-left: 10px; cursor: pointer;">
+                            <span style="font-size: 18px;">{{ initials }}</span>
+                        </div>
+                        <div class="context-menu" id="context-menu">
+                            <ul>
+                                <li><a href="#">Signout</a></li>
+                            </ul>
+                        </div>                
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'signin_blog' domaine=domaine site_id=site_id %}">Signin</a></li>
+                    {% endif %}
+                </ul>
+            </div>            
+        </div>
+    </nav>
+    <!-- Page header with logo and tagline-->
+    <header class="py-5 bg-light border-bottom mb-4">
+        <div class="container">
+            <div class="text-center my-5">
+                <h1 class="fw-bolder" style="color: var(--site-color);">Welcome to {{ site_blog.title }}</h1>
+                <p class="lead mb-0">A Bootstrap 5 starter layout for your next blog homepage</p>
+            </div>
+        </div>
+    </header>
+    <!-- Page content-->
+    <div class="container">
+        <div class="row">
+            <!-- Blog entries-->
+            <div class="col-lg-8">
+                <!-- Featured blog post-->
+                {% if featured_posts %}
+                    {% with featured_posts.0 as featured_post %}
+                        <div class="card mb-4">
+                            <a href="#!"><img class="card-img-top" src="{{ featured_post.image.url }}" alt="{{ featured_post.title }}" style="object-fit: cover; width: 100%; height: 400px;"/></a>
+                            <div class="card-body">
+                                <div class="small text-muted">{{ featured_post.created_at }}</div>
+                                <h2 class="card-title">{{ featured_post.title }}</h2>
+                                <!-- Tronquer le contenu du post à 300 caractères -->
+                                <p class="card-text">{{ featured_post.content|truncatechars:300 }}</p>
+                                <a id="read-more-btn-{{ post.id }}" class="btn" style="background-color: var(--site-color);" href="{% url 'post_detail' domaine=domaine post_title=featured_post.title site_id=site_id post_id=featured_post.id %}">Read more →</a>
+                            </div>
+                        </div>
+                    {% endwith %}
+                {% endif %}          
+                <!-- Nested row for non-featured blog posts-->
+                <div class="row">
+                    <div class="col-lg-6">
+                        <!-- Première colonne -->
+                        {% for post in posts %}
+                            {% if forloop.counter0|divisibleby:2 %}
+                                <div class="card mb-4">
+                                    <a href="#!"><img class="card-img-top" src="{{ post.image.url }}" alt="{{ post.title }}" style="object-fit: cover; width: 100%; height: 200px;"/></a>
+                                    <div class="card-body">
+                                        <div class="small text-muted">{{ post.created_at }}</div>
+                                        <h2 class="card-title">{{ post.title }}</h2>
+                                        <p class="card-text">{{ post.content|truncatechars:100 }}</p>
+                                        <a id="read-more-btn-{{ post.id }}" class="btn" style="background-color: var(--site-color);" href="{% url 'post_detail' domaine=domaine post_title=post.title site_id=site_id post_id=post.id %}">Read more →</a>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="col-lg-6">
+                        <!-- Deuxième colonne -->
+                        {% for post in posts %}
+                            {% if not forloop.counter0|divisibleby:2 %}
+                                <div class="card mb-4">
+                                    <a href="#!"><img class="card-img-top" src="{{ post.image.url }}" alt="{{ post.title }}" style="object-fit: cover; width: 100%; height: 200px;"/></a>
+                                    <div class="card-body">
+                                        <div class="small text-muted">{{ post.created_at }}</div>
+                                        <h2 class="card-title">{{ post.title }}</h2>
+                                        <p class="card-text">{{ post.content|truncatechars:100 }}</p>
+                                        <a id="read-more-btn-{{ post.id }}" class="btn" style="background-color: var(--site-color);" href="{% url 'post_detail' domaine=domaine post_title=post.title site_id=site_id post_id=post.id %}">Read more →</a>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <!-- Pagination-->
+                <nav aria-label="Pagination">
+                    <hr class="my-0" />
+                    <ul class="pagination justify-content-center my-4">
+                        <li class="page-item {% if not posts.has_previous %}disabled{% endif %}">
+                            <a class="page-link" href="{% if posts.has_previous %}?page={{ posts.previous_page_number }}{% endif %}" tabindex="-1" aria-disabled="true">Newer</a>
+                        </li>
+                        {% for num in paginated_posts.paginator.page_range %}
+                            <li class="page-item {% if num == paginated_posts.number %}active{% endif %}">
+                                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                            </li>
+                        {% endfor %}
+                        <li class="page-item {% if not posts.has_next %}disabled{% endif %}">
+                            <a class="page-link" href="{% if posts.has_next %}?page={{ posts.next_page_number }}{% endif %}">Older</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- Side widgets-->
+            <div class="col-lg-4">
+                <!-- Search widget-->
+                <div class="card mb-4">
+                    <div class="card-header">Search</div>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
+                            <button class="btn" id="button-search" type="button" style="background-color: var(--site-color); color: #fff;">Go!</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Categories widget-->
+                <div class="card mb-4">
+                    <div class="card-header">Categories</div>
+                    <div class="card-body">
+                        <div class="row">
+                            {% for category in categories %}
+                                <div class="col-sm-6">
+                                    <ul class="list-unstyled mb-0">
+                                        <li><a href="#!">{{ category.name }}</a></li>
+                                    </ul>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <!-- Side widget-->
+                <div class="card mb-4">
+                    <div class="card-header">Side Widget</div>
+                    <div class="card-body">
+                        {% for post in latest_posts %}
+                            <div class="mb-4 d-flex align-items-center">
+                                <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-thumbnail me-3" style="max-height: 100px; max-width: 100px;">
+                                <h1 style="font-size: 15px; text-decoration: underline;">{{ post.title }}</h1>
+                            </div>
+                            <p class="small text-muted">{{ post.created_at|date:"d/m/Y" }}</p>
+                            {% if not forloop.last %}
+                                <hr>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer-->
+    <footer class="py-5" style="background-color: var(--site-color);">
+        <div class="container"><p class="m-0 text-center text-white">Copyright &copy; {{ site_blog.title }} | Create by .WebPam </p></div>
+    </footer>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var menuIcon = document.querySelector('.circle-button'); // Utilisation de querySelector
+            var contextMenu = document.querySelector('.context-menu'); // Utilisation de querySelector
+
+            // Fonction pour afficher ou masquer le menu contextuel
+            function toggleContextMenu() {
+                contextMenu.classList.toggle('show');
+            }
+
+            // Attacher la fonction au clic sur l'icône des trois petits points
+            menuIcon.addEventListener('click', toggleContextMenu);
+
+            // Masquer le menu contextuel lorsqu'on clique en dehors de celui-ci
+            document.addEventListener('click', function(event) {
+                if (!contextMenu.contains(event.target) && !menuIcon.contains(event.target)) {
+                    contextMenu.classList.remove('show');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+{% endblock %}

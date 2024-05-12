@@ -299,4 +299,9 @@ form > .form-three .bg-svg {
     .progress ul.progress-steps li p span {
         display: block;
     }
+    .domain-inputs input:last-child::placeholder {
+        color: #000;
+        font-size: 12px;
+        font-weight: 600;
+    }
 }

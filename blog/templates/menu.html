@@ -1,0 +1,399 @@
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>.WebPam | Dashboard</title>
+    <link rel="stylesheet" href="{% static 'assets/vendors/mdi/css/materialdesignicons.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/vendors/flag-icon-css/css/flag-icon.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/vendors/css/vendor.bundle.base.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/vendors/font-awesome/css/font-awesome.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}" />
+  </head>
+  <body>
+    <div class="container-scroller">
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <div class="text-center sidebar-brand-wrapper d-flex align-items-center">
+              <a class="sidebar-brand brand-logo"><img src="{% static 'assets/images/WEBPAM.png' %}" alt="logo" /></a>
+            </div>
+            <ul class="nav">
+              <li class="nav-item nav-profile">
+                <a href="#" class="nav-link">
+                  <div class="nav-profile-image">
+                    <img src="{% static 'assets/images/faces/face1.jpg' %}" alt="profile" />
+                    <span class="login-status online"></span>
+                    <!--change to offline or busy as needed-->
+                  </div>
+                  <div class="nav-profile-text d-flex flex-column pr-3">
+                    <span class="font-weight-medium mb-2">{{ user_info.username }}</span>
+                    <span class="font-weight-normal">{{ site_title }}</span>
+                  </div>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'dashboard_blog' domaine=domaine %}">
+                  <i class="mdi mdi-home menu-icon"></i>
+                  <span class="menu-title">Dashboard</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <i class="mdi mdi-menu menu-icon"></i>
+                  <span class="menu-title">Menu</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                  <i class="mdi mdi-wrench menu-icon"></i>
+                  <span class="menu-title">Customize</span>
+                  <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="ui-basic">
+                  <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Menu 1</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Menu 2</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Menu 3</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <i class="mdi mdi-message menu-icon"></i>
+                  <span class="menu-title">Message</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <span class="nav-link" href="#">
+                  <span class="menu-title">Manage</span>
+                </span>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <i class="mdi mdi-settings menu-icon"></i>
+                  <span class="menu-title">Settings</span>
+                </a>
+              </li>
+              <li class="nav-item sidebar-actions">
+                <div class="nav-link">
+                  <div class="mt-4">
+                    <div class="border-none">
+                      <p class="text-black">Notification</p>
+                    </div>
+                    <ul class="mt-4 pl-0">
+                      <li>Sign Out</li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+            </ul>
+        </nav>
+        <div class="container-fluid page-body-wrapper">
+            <nav class="navbar col-lg-12 col-12 p-lg-0 fixed-top d-flex flex-row">
+                <div class="navbar-menu-wrapper d-flex align-items-stretch justify-content-between">
+                  <button class="navbar-toggler navbar-toggler align-self-center mr-2" type="button" data-toggle="minimize">
+                    <i class="mdi mdi-menu"></i>
+                  </button>
+                  <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                      <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+                        <i class="mdi mdi-bell-outline"></i>
+                        <span class="count count-varient1">7</span>
+                      </a>
+                      <div class="dropdown-menu navbar-dropdown navbar-dropdown-large preview-list" aria-labelledby="notificationDropdown">
+                        <h6 class="p-3 mb-0">Notifications</h6>
+                        <a class="dropdown-item preview-item">
+                          <div class="preview-thumbnail">
+                            <img src="{% static 'assets/images/faces/face4.jpg' %}" alt="" class="profile-pic" />
+                          </div>
+                          <div class="preview-item-content">
+                            <p class="mb-0"> Dany Miles <span class="text-small text-muted">commented on your photo</span>
+                            </p>
+                          </div>
+                        </a>
+                        <a class="dropdown-item preview-item">
+                          <div class="preview-thumbnail">
+                            <img src="{% static 'assets/images/faces/face3.jpg' %}" alt="" class="profile-pic" />
+                          </div>
+                          <div class="preview-item-content">
+                            <p class="mb-0"> James <span class="text-small text-muted">posted a photo on your wall</span>
+                            </p>
+                          </div>
+                        </a>
+                        <a class="dropdown-item preview-item">
+                          <div class="preview-thumbnail">
+                            <img src="{% static 'assets/images/faces/face2.jpg' %}" alt="" class="profile-pic" />
+                          </div>
+                          <div class="preview-item-content">
+                            <p class="mb-0"> Alex <span class="text-small text-muted">just mentioned you in his post</span>
+                            </p>
+                          </div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <p class="p-3 mb-0">View all activities</p>
+                      </div>
+                    </li>
+                    <li class="nav-item dropdown d-none d-sm-flex">
+                      <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown">
+                        <i class="mdi mdi-email-outline"></i>
+                        <span class="count count-varient2">5</span>
+                      </a>
+                      <div class="dropdown-menu navbar-dropdown navbar-dropdown-large preview-list" aria-labelledby="messageDropdown">
+                        <h6 class="p-3 mb-0">Messages</h6>
+                        <a class="dropdown-item preview-item">
+                          <div class="preview-item-content flex-grow">
+                            <span class="badge badge-pill badge-success">Request</span>
+                            <p class="text-small text-muted ellipsis mb-0"> Suport needed for user123 </p>
+                          </div>
+                          <p class="text-small text-muted align-self-start"> 4:10 PM </p>
+                        </a>
+                        <a class="dropdown-item preview-item">
+                          <div class="preview-item-content flex-grow">
+                            <span class="badge badge-pill badge-warning">Invoices</span>
+                            <p class="text-small text-muted ellipsis mb-0"> Invoice for order is mailed </p>
+                          </div>
+                          <p class="text-small text-muted align-self-start"> 4:10 PM </p>
+                        </a>
+                        <a class="dropdown-item preview-item">
+                          <div class="preview-item-content flex-grow">
+                            <span class="badge badge-pill badge-danger">Projects</span>
+                            <p class="text-small text-muted ellipsis mb-0"> New project will start tomorrow </p>
+                          </div>
+                          <p class="text-small text-muted align-self-start"> 4:10 PM </p>
+                        </a>
+                        <h6 class="p-3 mb-0">See all activity</h6>
+                      </div>
+                    </li>
+                    <li class="nav-item nav-search border-0 ml-1 ml-md-3 ml-lg-5 d-none d-md-flex">
+                      <form class="nav-link form-inline mt-2 mt-md-0">
+                        <div class="input-group">
+                          <input type="text" class="form-control" placeholder="Search" />
+                          <div class="input-group-append">
+                            <span class="input-group-text">
+                              <i class="mdi mdi-magnify"></i>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                    </li>
+                  </ul>
+                  <ul class="navbar-nav navbar-nav-right ml-lg-auto">
+                    <li class="nav-item dropdown d-none d-xl-flex border-0">
+                      <a class="nav-link dropdown-toggle" id="languageDropdown" href="#" data-toggle="dropdown">
+                        <i class="mdi mdi-earth"></i> English </a>
+                      <div class="dropdown-menu navbar-dropdown" aria-labelledby="languageDropdown">
+                        <a class="dropdown-item" href="#"> French </a>
+                        <a class="dropdown-item" href="#"> Spain </a>
+                        <a class="dropdown-item" href="#"> Creole </a>
+                      </div>
+                    </li>
+                    <li class="nav-item nav-profile dropdown border-0">
+                      <a class="nav-link dropdown-toggle" id="profileDropdown" data-toggle="dropdown" style="display: flex;">
+                        <div class="nav-profile-img mr-2"></div>               
+                        <span class="profile-name">{{ user_info.username }}</span>
+                      </a>
+                      <div class="dropdown-menu navbar-dropdown w-100" aria-labelledby="profileDropdown">
+                        <a class="dropdown-item" href="#">
+                          <i class="mdi mdi-cached mr-2 text-success"></i> Activity Log </a>
+                        <a class="dropdown-item" href="/logout">
+                          <i class="mdi mdi-logout mr-2 text-primary"></i> Signout </a>
+                      </div>
+                    </li>
+                  </ul>
+                  <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+                    <span class="mdi mdi-menu"></span>
+                  </button>
+                </div>
+            </nav>
+            <div class="main-panel">
+              <div class="content-wrapper">
+                <div class="page-header">
+                    <h3 class="page-title">Menu</h3>
+                    <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">{{ site_title }}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"> Dashboard </li>
+                    </ol>
+                    </nav>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 grid-margin stretch-card">
+                    <div class="card">
+                      <div class="card-body">
+                        <h4 class="card-title">Add Category</h4>
+                        <p class="card-description">Add your Category here</p>
+                        <form action="{% url 'create_category' site_id %}" method="post" enctype="multipart/form-data" class="forms-sample">
+                          {% csrf_token %}
+                          <div class="form-group">
+                              <label for="exampleInputUsername1">Name</label>
+                              <input type="text" name="name" class="form-control" id="exampleInputUsername1" placeholder="Enter the name of your category" />
+                          </div>
+                          <div class="form-group">
+                              <label for="exampleInputEmail1">Description</label>
+                              <textarea
+                                  class="form-control"
+                                  id="exampleTextarea1"
+                                  rows="4"
+                                  name="description"
+                              ></textarea>
+                          </div>
+                          <button type="submit" class="btn btn-primary mr-2"> Submit </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 grid-margin stretch-card">
+                      <div class="card">
+                      <div class="card-body">
+                          <h4 class="card-title">Add Tag</h4>
+                          <p class="card-description">Add your Tag here</p>
+                          <form action="{% url 'create_tag' site_id %}" method="post" enctype="multipart/form-data"  class="forms-sample">
+                              {% csrf_token %}
+                              <div class="form-group row">
+                                  <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Name</label>
+                                  <div class="col-sm-9">
+                                  <input type="text" class="form-control" name="name" id="exampleInputUsername2" placeholder="Enter your tag name here" />
+                                  </div>
+                              </div>
+                              <button type="submit" class="btn btn-primary mr-2"> Submit </button>
+                          </form>
+                      </div>
+                      </div>
+                  </div>
+                  <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Add Post</h4>
+                            <p class="card-description">Create your Post Here</p>
+                            <form action="{% url 'create_post' site_id %}" method="post" enctype="multipart/form-data"   class="forms-sample">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="exampleInputName1">Title</label>
+                                    <input type="text" name="title" class="form-control" id="exampleInputName1" placeholder="Title" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="categories">Category</label>
+                                    <select class="form-control" id="categories" name="categories" multiple>
+                                        {% for category in categories %}
+                                          <option value="{{ category.pk }}">{{ category.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>                                        
+                                <div class="form-group">
+                                    <label for="tags">Tag</label>
+                                    <select class="form-control" id="exampleSelectGender" name="tags" multiple>
+                                        {% for tag in tags %}
+                                          <option value="{{ tag.pk }}">{{ tag.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>                                    
+                                <div class="form-group">
+                                    <label>File upload</label>
+                                    <input type="file" name="image" class="file-upload-default" />
+                                    <div class="input-group col-xs-12">
+                                    <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image" />
+                                    <span class="input-group-append">
+                                        <button class="file-upload-browse btn btn-primary" type="button"> Upload </button>
+                                    </span>
+                                    </div>
+                                </div>
+                                <div class="form-check form-check-flat form-check-primary">
+                                    <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" name="featured" /> Featured </label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleTextarea1">Content</label>
+                                    <textarea
+                                    class="form-control"
+                                    id="exampleTextarea1"
+                                    rows="4"
+                                    name="content"
+                                    ></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary mr-2"> Submit </button>
+                            </form>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-12 stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">List of posts</h4>
+                            <p class="card-description"> All of your posts </p>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Title</th>
+                                            <th>Content</th>
+                                            <th>Category</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                      {% for post in posts %}
+                                        <tr>
+                                          <td>{{ forloop.counter }}</td>
+                                          <td>{{ post.title }}</td>
+                                          <td>
+                                            {% if post.content|length > 50 %}
+                                              {{ post.content|slice:":50" }}...
+                                            {% else %}
+                                              {{ post.content }}
+                                            {% endif %}
+                                          </td>                                        
+                                          <td>
+                                            {% for category in post.categories.all %}
+                                              {{ category.name }}
+                                            {% endfor %}
+                                          </td>                                        
+                                          <td style="font-size: 20px; cursor: pointer;">
+                                            <a href="{% url 'edit_post' post_id=post.id %}"><i class="mdi mdi-pencil menu-icon text-primary"></i></a>
+                                            <a href="{% url 'delete_post' post_id=post.id %}" onclick="return confirm('Are you sure you want to delete this post?');"><i class="mdi mdi-delete menu-icon text-primary"></i></a>
+                                          </td>
+                                        </tr>
+                                      {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                </div>
+              </div>
+              <footer class="footer">
+                      <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                      <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © .WebPam 2024</span>
+                      <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> All rights reserved</span>
+                      </div>
+              </footer>
+            </div>
+            <!-- main-panel ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <script src="{% static 'assets/vendors/js/vendor.bundle.base.js' %}"></script>
+    <script src="{% static 'assets/vendors/select2/select2.min.js' %}"></script>
+    <script src="{% static 'assets/vendors/typeahead.js/typeahead.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/off-canvas.js' %}"></script>
+    <script src="{% static 'assets/js/hoverable-collapse.js' %}"></script>
+    <script src="{% static 'assets/js/misc.js' %}"></script>
+    <script src="{% static 'assets/js/file-upload.js' %}"></script>
+    <script src="{% static 'assets/js/typeahead.js' %}"></script>
+    <script src="{% static 'assets/js/select2.js' %}"></script>
+</body>
+</html>
+{% endblock %}

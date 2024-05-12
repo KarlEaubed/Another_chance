@@ -1,6 +1,8 @@
+# Model utilisateurs
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.db import models
 from django.utils import timezone
+
 
 class CustomUserManager(BaseUserManager):
     def _create_user(self, email, password=None, **extra_fields):
@@ -20,11 +22,14 @@ class CustomUserManager(BaseUserManager):
     def create_superuser(self, email, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('is_active', True)
 
         if extra_fields.get('is_staff') is not True:
             raise ValueError('Superuser must have is_staff=True.')
         if extra_fields.get('is_superuser') is not True:
             raise ValueError('Superuser must have is_superuser=True.')
+        if extra_fields.get('is_active') is not True:
+            raise ValueError('Superuser must have is_active=True.')
 
         return self._create_user(email, password, **extra_fields)
 
@@ -41,6 +46,9 @@ class User_Main(AbstractBaseUser, PermissionsMixin):
     is_superuser = models.BooleanField(default=False)  # Ajout du champ is_superuser
 
     date_joined = models.DateTimeField(default=timezone.now)
+    
+    
+
 
     objects = CustomUserManager()
 
@@ -55,23 +63,6 @@ class User_Main(AbstractBaseUser, PermissionsMixin):
 
 
 #############################################################################################
-
-
-
-class User_Standard(models.Model):
-    nom = models.CharField(max_length=50)
-    prenom = models.CharField(max_length=50) 
-    nom_utilisateur = models.CharField(max_length=255,unique=True)
-    email = models.EmailField(max_length=255)
-    mot_de_passe = models.CharField(max_length=255)
-    portable = models.CharField(max_length=20)
-    location = models.CharField(max_length=55)
-    date_de_nais = models.DateField()
-    statu = models.BooleanField(default = False)
-    def __str__(self):
-        return str(self.nom_utilisateur)
-
-
 
 
 

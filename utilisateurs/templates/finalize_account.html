@@ -41,7 +41,7 @@
                         </div> -->
                     </ul>
                 </div>
-                <form action="/setup_account" method="post">
+                <form action="/setup_account" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-one form-step active">
                         <div class="bg-svg"></div>
@@ -288,10 +288,6 @@
                                 <option value="Zimbabwe">Zimbabwe</option>
                             </select>
                         </div>
-                        <div>
-                            <label>Phone Number</label>
-                            <input type="tel" id="phone" value="{{ user_info.portable }}" placeholder="Enter your phone number" readonly>
-                        </div>
                     </div>
                     <div class="form-three form-step">
                         <div class="bg-svg"></div>
@@ -305,23 +301,13 @@
                             <input type="text" value="{{ user_info.username }}" placeholder="Enter your Username" readonly>
                         </div>
                         <div>
-                            <label>Which kind of website do you want? Make your choice</label>
-                            <select name="type" required>
-                                <option value="">Please Select</option>
-                                <option value="E-commerce">E-commerce</option>
-                                <option value="Blog">Blog</option>
-                                <option value="Portfolio">Portfolio</option>
-                                <option value="School Management">School Management</option>
-                                <option value="Hospital Management">Hospital Management</option>
-                            </select>
+                            <label>Profile Image (Optionnal)</label>
+                            <input type="file" name="profile_image" style="border: none;">
                         </div>
                         <div>
-                            <label>Domain Name</label>
-                            <div class="domain-inputs">
-                                <input type="text" name="domain_name" placeholder="Enter your domain name">
-                                <input type="text" placeholder=".webpam.com" readonly>
-                            </div>
-                        </div>                        
+                            <label>Phone Number</label>
+                            <input type="tel" id="phone" value="{{ user_info.portable }}" placeholder="Enter your phone number" readonly>
+                        </div>                 
                     </div>
                     <div class="form-four form-step">
                         <div class="bg-svg"></div>
@@ -382,14 +368,14 @@
     <script>
         var input = document.querySelector('#phone');
         window.intlTelInput(input, {});
-        document.addEventListener("DOMContentLoaded", function() {
-            var btnSubmit = document.querySelector('.btn-submit');
-            // Ajouter un écouteur d'événement sur le clic du bouton "btn-submit"
-            btnSubmit.addEventListener('click', function() {
-                // Rediriger l'utilisateur vers la fonction vue logOut
-                window.location.href = "/setup_account";
-            });
-        });
+        // document.addEventListener("DOMContentLoaded", function() {
+        //     var btnSubmit = document.querySelector('.btn-submit');
+        //     // Ajouter un écouteur d'événement sur le clic du bouton "btn-submit"
+        //     btnSubmit.addEventListener('click', function() {
+        //         // Rediriger l'utilisateur vers la fonction vue logOut
+        //         window.location.href = "/setup_account";
+        //     });
+        // });
     </script>
 </body>
 </html>

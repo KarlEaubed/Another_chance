@@ -1,0 +1,51 @@
+{% block content %}
+{% load static %}
+
+{% include 'headerporto.html' with site_id=site_id %}
+
+
+<div class="container">
+    <h2>Ajouter à propos</h2>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="texte">Texte:</label>
+        <textarea id="texte" name="texte" required></textarea><br><br>
+        
+        <label for="autre">Autre:</label>
+        <textarea id="autre" name="autre"></textarea><br><br>
+        
+        <label for="image">Image:</label>
+        <input type="file" id="image" name="image"><br><br>
+        
+        <button type="submit">Ajouter À Propos</button>
+    </form>
+</div>
+
+
+<div class="card-group">
+    {% for about in abouts %}
+    <div class="card">
+        <img class="card-img-top" src="{{ about.image.url }}" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">{{ about.texte }}</h5>
+            <p class="card-text">{{ about.autre }}</p>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">Last updated 3 mins ago</small>
+        </div>
+        <!-- Bouton pour la modification du service -->
+        {% comment %} <form method="GET" action="{% url 'modif_pro' pro.id %}">
+            <button type="submit" class="btn btn-primary">Modifier</button>
+        </form> {% endcomment %}
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

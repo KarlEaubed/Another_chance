@@ -1,0 +1,23 @@
+<!-- add_hero.html -->
+<div class="container">
+    <h2>Ajouter un Héros</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="titre1">Titre 1:</label>
+        <input type="text" id="titre1" name="titre1" required><br><br>
+        
+        <label for="titre2">Titre 2:</label>
+        <input type="text" id="titre2" name="titre2"><br><br>
+        
+        <label for="paragraphe">Paragraphe:</label>
+        <textarea id="paragraphe" name="paragraphe"></textarea><br><br>
+        
+        <label for="cv">CV:</label>
+        <input type="text" id="cv" name="cv"><br><br>
+        
+        <label for="image">Image:</label>
+        <input type="file" id="image" name="image"><br><br>
+        
+        <button type="submit">Ajouter Héros</button>
+    </form>
+</div>

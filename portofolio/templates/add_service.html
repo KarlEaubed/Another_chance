@@ -1,0 +1,63 @@
+{% block content %}
+{% load static %}
+
+{% include 'headerporto.html' with site_id=site_id %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un service</title>
+</head>
+<body>
+    <h1>Ajouter un service</h1>
+
+    <h1><a href="{% url 'add_pro' site_id=site_id %}" >pro</h1> 
+    <h1><a href="{% url 'add_about' site_id=site_id %}" >about</h1>
+     <h1><a href="{% url 'add_hero' site_id=site_id %}" >hero</h1>
+      <h1> <a href="{% url 'add_info' site_id=site_id %}" >info</h1>
+    
+    <form action="{% url 'add_service' site_id=site_id %}" method="post" enctype="multipart/form-data">
+
+        
+            
+                
+                   
+
+        {% csrf_token %}
+        <label for="titre">Titre:</label><br>
+        <input type="text" id="titre" name="titre"><br>
+        <label for="image">Image:</label><br>
+        <input type="file" id="image" name="image"><br>
+        <label for="descriptions">Descriptions:</label><br>
+        <textarea id="descriptions" name="descriptions"></textarea><br>
+        <label for="autres">Autres:</label><br>
+        <input type="text" id="autres" name="autres"><br><br>
+        <input type="submit" value="Ajouter">
+    </form>
+
+
+    <div class="card-group">
+        {% for service in services %}
+        <div class="card">
+            <img class="card-img-top" src="{{ service.image.url }}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">{{ service.titre }}</h5>
+                <p class="card-text">{{ service.descriptions }}</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Last updated 3 mins ago</small>
+            </div>
+            <!-- Bouton pour la modification du service -->
+            <form method="GET" action="{% url 'modif_service' service.id %}">
+                <button type="submit" class="btn btn-primary">Modifier</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+
+
+</body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% block content %}
+{% load static %}
+
+{% include 'headerporto.html' with site_id=site_id %}
+<div class="container">
+    <h2>Ajouter un Projet</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="titre">Titre:</label>
+        <input type="text" id="titre" name="titre" required><br><br>
+        
+        <label for="descriptions">Descriptions:</label>
+        <textarea id="descriptions" name="descriptions" required></textarea><br><br>
+        
+        <label for="image">Image:</label>
+        <input type="file" id="image" name="image"><br><br>
+        
+        <label for="created_at">Date de création:</label>
+        <input type="date" id="created_at" name="created_at" required><br><br>
+        
+        <label for="links">Liens:</label>
+        <input type="text" id="links" name="links"><br><br>
+        
+        <label for="categorie">Catégorie:</label>
+        <input type="text" id="categorie" name="categorie"><br><br>
+        
+        <button type="submit">Ajouter Projet</button>
+    </form>
+</div>
+
+
+<div class="card-group">
+    {% for pro in pros %}
+    <div class="card">
+        <img class="card-img-top" src="{{ pro.image.url }}" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">{{ pro.titre }}</h5>
+            <p class="card-text">{{ pro.descriptions }}</p>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">Last updated 3 mins ago</small>
+        </div>
+        <!-- Bouton pour la modification du service -->
+        {% comment %} <form method="GET" action="{% url 'modif_pro' pro.id %}">
+            <button type="submit" class="btn btn-primary">Modifier</button>
+        </form> {% endcomment %}
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

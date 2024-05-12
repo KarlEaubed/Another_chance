@@ -1,0 +1,114 @@
+{% block content %} 
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!----======== CSS ======== -->
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!----===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <title>Dashboard</title>
+</head>
+
+<body>
+    <nav>
+        <div class="logo-name">
+            <!-- <div class="logo-image">
+                <img src="images/logo.png" alt="">
+            </div> -->
+
+            <span class="logo_name">.WebPam</span>
+        </div>
+
+        <div class="menu-items">
+            <ul class="nav-links">
+                <span class="logo_name">Menu</span>
+                <li>
+                    <a href="{% url 'dashboard_blog' %}" class="{% if request.path == 'dashboard_blog' or request.path == '/signin' %}active{% endif %}">
+                        <i class="uil uil-estate"></i>
+                        <span class="link-name">Dashboard</span>
+                    </a>                    
+                </li>
+                <li>
+                    <a href="{% url 'chat' %}" class="{% if request.path == 'chat' %}active{% endif %}">
+                        <i class="fa fa-comments-o" aria-hidden="true"></i>
+                        <span class="link-name">Message</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'theme' %}" class="{% if request.path == 'theme' %}active{% endif %}">
+                        <i class="fa fa-paint-brush" aria-hidden="true"></i>
+                        <span class="link-name">Theme</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'manage' %}" class="{% if request.path == 'manage' %}active{% endif %}">
+                        <i class="fa fa-wrench" aria-hidden="true"></i>
+                        <span class="link-name">Manage</span>
+                    </a>
+                </li>
+                <span class="logo_name">Manage</span>
+                <li>
+                    <a href="/setting" class="{% if request.path == '/setting' %}active{% endif %}">
+                        <i class="fa fa-cog" aria-hidden="true"></i>
+                        <span class="link-name">Setting</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/protection" class="{% if request.path == '/protection' %}active{% endif %}">
+                        <i class="fa fa-shield" aria-hidden="true"></i>
+                        <span class="link-name">Protection</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/user_behavior" class="{% if request.path == '/user_behavior' %}active{% endif %}">
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                        <span class="link-name">User Behavior</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/help" class="{% if request.path == '/help' %}active{% endif %}">
+                        <i class="fa fa-question-circle" aria-hidden="true"></i>
+                        <span class="link-name">Help</span>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="logout-mode">
+                <li>
+                    <a href="/logout">
+                        <i class="uil uil-signout"></i>
+                        <span class="link-name">Logout</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <section class="dashboard">
+        <div class="top">
+            <div class="search-box">
+                <i class="uil uil-search"></i>
+                <input type="text" placeholder="Search here...">
+            </div>
+            <div class="icons">
+                <i class="fa fa-bell-o" style='font-size:30px'; aria-hidden="true"> | </i>
+                <i class="fa fa-commenting-o" style='font-size:30px'; aria-hidden="true"> | </i>
+                <i class="fa fa-bell-o" style='font-size:30px'; aria-hidden="true"></i>
+            </div>
+            <div class="user">
+                <p><i class="fa fa-user-circle" style='font-size:20px;color:#000' aria-hidden="true">  </i> {{ user_info.username }} </p>
+            </div>
+        </div>
+{% endblock %}

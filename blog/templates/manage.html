@@ -1,0 +1,28 @@
+{% block content %}
+{% load static %}
+{% include 'header.html' %}
+
+{% if site %}
+<h2>Site Details</h2>
+<p>Domain: {{ site.domaine }}</p>
+<p>Type: {{ site.type }}</p>
+<p>Abonnement: {% if abonement %} {{ abonement.type_abonnement }} ({{ abonement.date_debut }} - {{ abonement.date_fin }}) {% else %} No abonement {% endif %}</p>
+<!-- Ajoutez d'autres informations du site ici -->
+{% if site_blog_info %}
+    <h3>Site Blog Info</h3>
+    <p>Title: {{ site_blog_info.title }}</p>
+    <p>Logo: <img src="{{ site_blog_info.logo.url }}" alt="Logo"></p>
+    <p>Couleur: {{ site_blog_info.Couleur }}</p>
+    <p>Created At: {{ site_blog_info.created_at }}</p>
+    <p>Post Count: {{ post_count }}</p>
+    <p>Comment Count: {{ comment_count }}</p>
+    <p>Like Count: {{ like_count }}</p>
+{% else %}
+    <p>No site blog info found.</p>
+{% endif %}
+{% else %}
+<p>No site found.</p>
+{% endif %}
+</body>
+</html>
+{% endblock %}

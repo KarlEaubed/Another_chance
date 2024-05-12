@@ -1,10 +1,11 @@
 
+import django
 from pathlib import Path
 import os
 from . info import *
+# from utilisateurs.views import view_site
 
 
-import django
 from django.utils.encoding import force_str
 django.utils.encoding.force_text = force_str
 
@@ -26,7 +27,10 @@ SECRET_KEY = 'django-insecure-=w93bi)zm*lau@joctf_m-ou1*f$g9y8zth*m-zuz0nl%wm8nw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+
+
+ALLOWED_HOSTS = ['.webpam.com', 'localhost', '127.0.0.1']
+
 
 
 # Application definition
@@ -38,12 +42,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'ecommerce',
+    'ecommerce',
     'sitewebpam',
     'utilisateurs',
-    # 'blog',
-    # 'school_Management',
-    # 'hospital_Management',
+    'portofolio',
+    'blog',
+    'school_Management',
+    'hospital_Management',
 
     'django.contrib.sites',
     'allauth',
@@ -51,6 +56,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
+    'paypal.standard.ipn',
 
 ]
 
@@ -73,6 +79,7 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(BASE_DIR, 'blog', 'templates'),
             os.path.join(BASE_DIR, 'utilisateurs', 'templates'),
+            os.path.join(BASE_DIR, 'portofolio', 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -102,7 +109,9 @@ DATABASES = {
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
+    'blog.backends.UserStandardBackend',
 ]
+
 
 
 # Password validation
@@ -185,4 +194,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'utilisateurs.User_Main'
 
+
 # ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+
+APPEND_SLASH = False
+
+
+# Paypal Settings
+
+PAYPAL_TEST = True
+
+PAYPAL_RECEIVER_EMAIL = 'carlobeddorvil20@gmail.com'

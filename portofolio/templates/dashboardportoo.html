@@ -1,0 +1,34 @@
+{% block content %}
+{% load static %}
+
+{% include 'headerporto.html' with site_id=site_id %}
+
+
+
+<div class="container">
+    <span class="text">{{ portofolio.title }} Dashboard</span>
+
+<a href="{% url 'view_site_portofolio' domaine=sitewebpam.domaine %}" class="text1"><span >View your Website</span></a>
+
+
+
+
+
+<h1>Portofolio Dashboard</h1>
+<h2>Domaine: {{ domaine }}</h2>
+<h3>Détails du Portofolio:</h3>
+<p>Title: </p>
+<p>Couleur: {{ portofolio.couleur }}</p>
+<p>Logo: <img src="{{ portofolio.logo.url }}" alt="Logo"></p>
+</div>
+
+
+
+
+
+
+         
+
+
+
+{% endblock %}

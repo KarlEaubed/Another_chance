@@ -261,6 +261,11 @@ cursor: pointer;
 transition: background 0.3s ease;
 }
 
+.pricing-table .grid .box .button button a {
+    text-decoration: none;
+    color: #fff;
+}
+
 .pricing-table .grid .box .button button:hover {
 background: linear-gradient(to bottom, #3a6073, #3a7bd5); /* Change the colors for the hover effect */
 }

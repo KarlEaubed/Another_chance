@@ -1,0 +1,107 @@
+{% block content %}
+{% load static %}
+{% include 'header.html' %}
+
+<style>
+  
+
+    .bg-custom {
+        background-color: #050505; /* Couleur de fond spécifiée */
+    }
+</style>
+
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <br>
+    <br>
+    <br>
+    <div class="container bg-custom">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <!-- Div au-dessus du formulaire -->
+                <div class="mb-4">
+
+                </div>
+
+                <h2 class="text-white">Create Post</h2>
+                <form method="post" enctype="multipart/form-data">
+
+                    {% csrf_token %}
+                    <!-- Name input -->
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <label class="form-label text-white" for="title">Titre</label>
+                        <input type="text" id="title" class="form-control" name="title" />
+                        
+                    </div>
+                    <!-- Name input -->
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <label class="form-label text-white" for="image">Image</label>
+                        <input type="file" id="image" class="form-control" name="image" />
+                        
+                    </div>
+
+                    <!-- Message input -->
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <label class="form-label text-white" for="content">Content :</label>
+                        <textarea class="form-control" id="content" rows="7" name="content"></textarea>
+                       
+                    </div>
+
+
+                    <!-- featured checkbox -->
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="checkbox" id="featured" name="featured">
+                        <label class="form-label text-white" for="content">Featured</label>
+                    </div>
+
+
+  
+                    
+                    <!-- Name input -->
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <label class="form-label " for="categories">Categories :</label>
+                        <select id="categories" name="categories"  class="form-control text-primary" multiple>
+                            {% for category in categories %}
+                                <option value="{{ category.pk }}">{{ category.name }}</option>
+                            {% endfor %}
+                        </select><br>
+                        
+                       
+                    </div>
+
+
+                
+
+                    <!-- Name input -->
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <label class="form-label text-white" for="tags">Tags :</label>
+                        <select id="tags" name="tags" multiple class="form-control">
+                            {% for tag in tags %}
+                                <option value="{{ tag.pk }}">{{ tag.name }}</option>
+                            {% endfor %}
+                        </select><br>
+                        
+                    </div>
+
+            
+                    
+
+                    
+
+                    <!-- Submit button -->
+                    <button data-mdb-ripple-init type="submit" class="btn btn-secondary btn-block mb-4">Create</button>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+    
+{% endblock %}
+
+

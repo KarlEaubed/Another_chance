@@ -1,0 +1,28 @@
+<!-- modifservice.html -->
+
+<h2>Modifier le service</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!-- Champ caché pour la méthode HTTP -->
+    <input type="hidden" name="method" value="POST">
+    
+    <!-- Champs de formulaire pour la modification du service -->
+    <div class="form-group">
+        <label for="titre">Titre :</label>
+        <input type="text" class="form-control" id="titre" name="titre" value="{{ service.titre }}">
+    </div>
+    
+    <div class="form-group">
+        <label for="descriptions">Description :</label>
+        <textarea class="form-control" id="descriptions" name="descriptions">{{ service.descriptions }}</textarea>
+    </div>
+    
+    <div class="form-group">
+        <label for="image">Image :</label>
+        <input type="file" class="form-control-file" id="image" name="image">
+    </div>
+    
+    <!-- Bouton pour soumettre les modifications -->
+    <button type="submit" class="btn btn-primary">Modifier le service</button>
+</form>

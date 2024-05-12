@@ -197,10 +197,25 @@ body.dark .nav-links li a:hover .link-name {
     border-top: 1px solid var(--border-color);
 }
 
+.nav-links li .active:before {
+    content: "";
+    position: absolute;
+    left: -7px;
+    height: 5px;
+    width: 5px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+}
+
 .menu-items .mode {
     display: flex;
     align-items: center;
     white-space: nowrap;
+}
+
+.nav-links li .active i,
+.nav-links li .active .link-name {
+    color: var(--primary-color);
 }
 
 .menu-items .mode-toggle {
@@ -352,7 +367,7 @@ nav.close~.dashboard .top {
 }
 
 .dash-content .title .text1 {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 500;
     color: var(--text-color);
     margin-left: 65%;
@@ -454,6 +469,7 @@ nav.close~.dashboard .top {
     background-color: var(--box4-color);
     color: white;
 }
+
 
 .dash-content .activity .activity-data {
     display: flex;
