@@ -124,15 +124,17 @@
                             <i class="mdi mdi-share-variant share-icon" data-site-id="{{ site_id }}" data-post-id="{{ post.id }}">Partager</i>
                         </div>
                     </div>
-                    <div class="popup" id="sharePopup">
-                        <p>Partager ce post :</p>
-                        <p id="postLink"></p>
-                        <div class="share-buttons">
-                          <button id="copyLinkButton">Copier le lien</button>
-                          <button onclick="shareOnFacebook()">Partager sur Facebook</button>
-                          <!-- Ajoutez d'autres boutons pour d'autres réseaux sociaux si nécessaire -->
+                    {% if user_standard %}
+                        <div class="popup" id="sharePopup">
+                            <p>Partager ce post :</p>
+                            <p id="postLink"></p>
+                            <div class="share-buttons">
+                            <button id="copyLinkButton">Copier le lien</button>
+                            <button onclick="shareOnFacebook()">Partager sur Facebook</button>
+                            <!-- Ajoutez d'autres boutons pour d'autres réseaux sociaux si nécessaire -->
+                            </div>
                         </div>
-                    </div>                                       
+                    {% endif %}                                       
                 </article>
                 <!-- Comments section-->
                 {% if user_standard %}
